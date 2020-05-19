@@ -1,0 +1,63 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+h1 {
+  text-decoration: black underline;
+}
+
+h2 {
+  font-size: 16px;
+  text-decoration: black underline;
+}
+
+#map {
+  bottom: 0;
+  min-height: 20em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.leaflet-control-browser-print {display: none;}
+
+.grid-print-container { // grid holder that holds all content (map and any other content)
+  grid-template: auto 1fr auto / 1fr;
+  //background-color: orange;
+}
+.grid-map-print { // map container itself
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+}
+#qrcode { // Dynamic title styling
+  // grid-row: 2;
+  justify-self: left;
+  color: white;
+  //position: fixed;
+  z-index: 999;
+}
+
+.loader {
+  animation: spin 2s linear infinite;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -60px;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  z-index: 999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

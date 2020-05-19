@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>in 15 minuti</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link rel="stylesheet" href="css/header.css"/>
+    <!-- using plugin instead for better map rendering
+      <link rel="stylesheet" href="css/print.css"  type="text/css" media="print"/>
+    -->
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="resources/fontawesome-free-5.13.0-web/css/all.min.css">
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <!--https://github.com/davidshimjs/qrcodejs-->
+    <script src="lib/qrcode.min.js" ></script>
+    <script src="lib/leaflet.browser.print.min.js"></script>
+    <script src="lib/lib.js"></script>
+
+
+  </head>
+  <body>
+
+    <div class="loader" id="loader"></div>
+    <div class="header" id="header">
+      <a href="#default" class="logo">in 15 Minuti</a>
+      <div class="header-right">
+        <!-- TODO
+          <div hidden="true">Steps: <input id="cutoffinput" type="text" onchange="getcutoffs()"></input></div>
+          <div class="modebox">
+          <span><input type="checkbox" class="modeselector"  id='bicycleselector'
+          onchange="getselection()" value="BICYCLE" checked>🚲 in bici</span>
+          <span><input type="checkbox" class="modeselector" id='walkselector'
+          onchange="getselection()" value="WALK" checked>🚶 a piedi</span>
+          </div>
+        -->
+        <div hidden="true" align="center" id="qrcode"  leaflet-browser-print-content></div>
+        <a id="sharediv"><i class="fa fa-share-alt"></i></a>
+        <a id="aboutdiv" href="info.html"><i class="fa fa-question-circle"></i></a>
+        <a id="printdiv" ><i class="fa fa-print"></i></a>
+        <a href="javascript:void(0);" class="hamburger icon" onclick="responsiveHeader()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+    </div>
+
+
+    <div id='map'></div>
+
+    <script src="lib/main.js"></script>
+
+  </body>
+</html>
+

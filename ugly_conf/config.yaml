@@ -1,0 +1,11 @@
+port: 8585 # the listening port for ugly_server
+proxiedservice: "http://geoserver:8080" # the remote server we're proxying
+constraints:
+  "lat":
+    round: 4
+    max: 45.15
+    min: 45
+  "lng":
+    round: 4
+    max: 7.82
+    min: 7.5
