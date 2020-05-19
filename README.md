@@ -6,6 +6,8 @@ minutes.
 You just need to click on the map to see coloured the zones reachable in that
 time, and you can share that map using a qrcode.
 
+A stub for printing the map with the qrcode is also provided.
+
 ## Running via `docker-compose`
 
 ### 1. Get the `pbf`
