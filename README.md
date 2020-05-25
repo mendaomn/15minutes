@@ -48,3 +48,4 @@ docker-compose up
 Be patient: the tiles server and the isochrone server are pretty big and needs
 some time for starting.
 
+Then go to localhost:9090 and enjoy!
