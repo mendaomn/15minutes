@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   geoserver:
-    image: "alessiogiambrone/isochrone_server"
+    image: "quay.io/alessiogiambrone/isochrone_server"
     ports:
       - 8080
     healthcheck:
