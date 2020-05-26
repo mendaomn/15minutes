@@ -1,8 +1,4 @@
 var otp_api_url = window.location.origin+'/api';
-var options = parseUrl();
-var defmode = options.mode;
-var init_coords = options.coords;
-var map = L.map('map').setView(init_coords, 12);
 var sharediv = document.getElementById('sharediv');
 // setting values in page
 var modeselectors = document.getElementsByClassName('modeselector');
@@ -13,30 +9,40 @@ var qrcode = new QRCode(qrcode_div, window.location.href);
 
 var tile_url = 'map/tile/{z}/{x}/{y}.png';
 var tile_attribution = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+var map
 
 loader_div.style.display = "none";
 
-L.tileLayer(tile_url, {
-  maxZoom: 18,
-  attribution: tile_attribution,
-}).addTo(map);
-L.control.browserPrint({
-  documentTitle: "Luoghi a meno di 15 minuti da qua",
-  printModes: [
-    //L.control.browserPrint.mode.auto("Landscape", "A4"),
-    L.control.browserPrint.mode.landscape(),
-  ],
-}).addTo(map)
+parseUrl().then(initMap, console.error)
+
+/* inits map
+*/
+function initMap(options) {
+  var defmode = options.mode;
+  var init_coords = options.coords;
+  map = L.map('map').setView(init_coords, 12);
+  L.tileLayer(tile_url, {
+    maxZoom: 18,
+    attribution: tile_attribution,
+  }).addTo(map);
+  L.control.browserPrint({
+    documentTitle: "Luoghi a meno di 15 minuti da qua",
+    printModes: [
+      //L.control.browserPrint.mode.auto("Landscape", "A4"),
+      L.control.browserPrint.mode.landscape(),
+    ],
+  }).addTo(map)
 
 
-map.on('click', onMapClick);
+  map.on('click', onMapClick);
 
-// map initialization
-try {
-  map.zoomControl.setPosition('bottomleft');
-  latlng = {"lat": init_coords[0], "lng": init_coords[1]};
-  onMapClick({"latlng": latlng});
-} catch(e){;}
+  // map initialization
+  try {
+    map.zoomControl.setPosition('bottomleft');
+    latlng = {"lat": init_coords[0], "lng": init_coords[1]};
+    onMapClick({"latlng": latlng});
+  } catch(e){;}
+}
 
 // qrcode show/hide
 sharediv.addEventListener('click', function(){

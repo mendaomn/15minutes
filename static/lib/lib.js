@@ -75,14 +75,19 @@ function parseUrl(){
   var modes = getDefault(search_params.getAll('modes'), modes);
   var min_cutoffs = getDefault(search_params.getAll('cutoffs'), [15]);
   var cutoffs = min_cutoffs.map(i => i*60);
-  var lat = getDefault(search_params.get('lat'), 45.074975);
-  var lng = getDefault(search_params.get('lng'), 7.6736);
-  return {
-    'modes': modes,
-    'cutoffs': cutoffs,
-    'min_cutoffs': min_cutoffs,
-    'coords': [lat, lng],
-  };
+
+  return get_boundaries()
+    .then(get_center)
+    .then(function (center_coords) {
+      var lat = getDefault(search_params.get('lat'), center_coords.lat);
+      var lng = getDefault(search_params.get('lng'), center_coords.lng);
+      return {
+        'modes': modes,
+        'cutoffs': cutoffs,
+        'min_cutoffs': min_cutoffs,
+        'coords': [lat, lng],
+      };
+    })
 }
 
 function get_text_marker(geoJson, map, text){
@@ -192,4 +197,22 @@ function getselection(i){
     modes = modes+ modeselectors[i].value;
   }
   mapRedraw(init_coords);
+}
+
+/* gets map boundaries
+*/
+function get_boundaries() {
+  return fetch(otp_api_url+"/boundaries")
+    .then(function(res) {
+      return res.json()
+    })
+}
+
+/* gets center coords
+*/
+function get_center(boundaries) {
+  return {
+    lat: (boundaries.maxLat + boundaries.minLat) / 2,
+    lng: (boundaries.maxLng + boundaries.minLng) / 2
+  }
 }
